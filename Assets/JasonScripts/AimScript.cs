@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AimScript : MonoBehaviour {
-	private const int speed = 10;
+	private const float speed = 10;
 	private Vector3 movement;
 	public bool player1;
 

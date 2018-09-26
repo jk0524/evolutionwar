@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
 	public float hp = 10f;
@@ -29,6 +30,7 @@ public class PlayerScript : MonoBehaviour {
         if (hp <= 0)
         {
             Destroy(this.gameObject);
+            Application.LoadLevel("GameOverScenev2");
         }
     }
 }

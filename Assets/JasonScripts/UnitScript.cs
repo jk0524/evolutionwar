@@ -30,9 +30,19 @@ public class UnitScript : MonoBehaviour
                 GameObject.Find("Player1").GetComponent<PlayerScript>().cash += cost * returnRate;
             }
             Destroy(this.gameObject);
+            SoundEffectsHelper.Instance.MakeExplosionSound();
+            SpecialEffectsHelper.Instance.Explosion(transform.position);
         }
-        if (this.GetComponent<Rigidbody2D>().velocity.magnitude < 1) {
-            this.GetComponent<Rigidbody2D>().velocity *= 2;
+        if (this.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < 1) {
+            this.gameObject.GetComponent<Rigidbody2D>().velocity *= 2 * this.gameObject.GetComponent<Rigidbody2D>().velocity;
+            Debug.Log("scale");
+            Vector2 boost;
+            if (player1) {
+                boost = new Vector2(1,0);
+            } else{
+                boost = new Vector2(-1, 0);
+            }
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = this.gameObject.GetComponent<Rigidbody2D>().velocity + boost;
         }
     }
 }

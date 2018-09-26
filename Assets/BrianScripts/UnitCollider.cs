@@ -21,7 +21,7 @@ public class UnitCollider : MonoBehaviour {
      */
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("collide");
+        //Debug.Log("collide");
        
         if(col.gameObject.GetComponent<UnitScript>()){
             if (col.gameObject.GetComponent<UnitScript>().player1

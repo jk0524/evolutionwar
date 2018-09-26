@@ -19,7 +19,7 @@ public class SpawnScript : MonoBehaviour
   private PlayerScript playerStats;
   private UnitScript UnitStats;
   private Vector3 aim;
-  private const int aimspeed = 10;
+  private const float aimspeed = 10;
 
   public bool player1;
 
@@ -27,6 +27,7 @@ public class SpawnScript : MonoBehaviour
   /// Cooldown in seconds between two shots
   /// </summary>
   public float shootingRate = 0.25f;
+  private float boxShootingRate = 3f;
   private float shootCooldown;
 
   void Start() {
@@ -56,7 +57,11 @@ public class SpawnScript : MonoBehaviour
         spawnBoxUnit();
       }
 
-      else if (Input.GetKey(KeyCode.A) && player1) {
+      
+
+
+    }
+    if (Input.GetKey(KeyCode.A) && player1) {
       aimUp();
     } else if (Input.GetKey(KeyCode.D) && player1) {
       aimDown();
@@ -66,9 +71,6 @@ public class SpawnScript : MonoBehaviour
       aimDown();
     } else if (Input.GetKey(KeyCode.L) && !player1) {
       aimUp();
-    }
-
-
     }
 
   }
@@ -113,14 +115,15 @@ public class SpawnScript : MonoBehaviour
 
       createdUnit.position = aim + displace;
       playerStats = gameObject.GetComponent<PlayerScript>();
-      UnitStats = Unit.gameObject.GetComponent<UnitScript>();
+      UnitStats = createdUnit.gameObject.GetComponent<UnitScript>();
       playerStats.cash -= UnitStats.cost;
+      SoundEffectsHelper.Instance.MakePlayerShotSound();
 
   }
 
   void spawnBoxUnit() {
-    shootCooldown = shootingRate;
-    shootCooldown = shootingRate;
+    shootCooldown = boxShootingRate;
+
 
       var createdUnit = Instantiate(BoxUnit) as Transform;
       Vector3 displace;
@@ -132,7 +135,8 @@ public class SpawnScript : MonoBehaviour
 
       createdUnit.position = aim + displace;
       playerStats = gameObject.GetComponent<PlayerScript>();
-      UnitStats = Unit.gameObject.GetComponent<UnitScript>();
+      UnitStats = createdUnit.gameObject.GetComponent<UnitScript>();
       playerStats.cash -= UnitStats.cost;
+      SoundEffectsHelper.Instance.MakePlayerShotSound();
   }
 }
